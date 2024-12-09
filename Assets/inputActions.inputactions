@@ -1,0 +1,67 @@
+{
+    "name": "inputActions",
+    "maps": [
+        {
+            "name": "player",
+            "id": "82edd57b-a595-46fb-a859-693dc6d104dc",
+            "actions": [
+                {
+                    "name": "move",
+                    "type": "Value",
+                    "id": "9aacb737-9af7-4b09-b741-81577ae45080",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "24c162f3-99e7-465e-90d9-30a97f7ab34f",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0f5aab15-64f7-463e-bfa7-503afedd864c",
+                    "path": "a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29555a9b-cebe-4d8c-96a9-c4da908aebf8",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc6c965b-9192-414e-9ff3-d2c38d1c0252",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
