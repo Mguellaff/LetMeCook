@@ -9,6 +9,7 @@ public class HeatSliderScript : MonoBehaviour
     private ParticleSystem.MainModule mainModule;
     private float temperature;
     private TextMeshProUGUI temperatureText;
+    [SerializeField] private Transform switchTransform;
     void Start()
     {
         heatSlider = GetComponentInChildren<Slider>();
@@ -20,6 +21,7 @@ heatSlider.onValueChanged.AddListener(OnSliderValueChanged);
     void OnSliderValueChanged(float value)
     {
         temperature = value * 100 + 50;
+        switchTransform.rotation= Quaternion.Euler(0, 0, 180 * value);
         Color startColor;
         Color endColor;
 
