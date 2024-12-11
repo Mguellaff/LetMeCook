@@ -1,27 +1,44 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HeatSliderScript : MonoBehaviour
 {
-    private Slider heatSlider; 
+    private Slider heatSlider;
     [SerializeField] private ParticleSystem particleSystem;
     private ParticleSystem.MainModule mainModule;
-
+    private float temperature;
+    private TextMeshProUGUI temperatureText;
     void Start()
     {
-        heatSlider= GetComponent<Slider>();
-        if (particleSystem != null)
-        {
-            mainModule = particleSystem.main;
-        }
+        heatSlider = GetComponentInChildren<Slider>();
+        temperatureText = GetComponentInChildren<TextMeshProUGUI>();
+        mainModule = particleSystem.main;
+heatSlider.onValueChanged.AddListener(OnSliderValueChanged);
     }
 
-    void Update()
+    void OnSliderValueChanged(float value)
     {
-        if (heatSlider != null && particleSystem != null)
+        temperature = value * 100 + 50;
+        Color startColor;
+        Color endColor;
+
+        if (value < 0.5f)
         {
-            float heatValue = heatSlider.value;
-            mainModule.startColor = new Color(heatValue, 0, 0);
+            startColor = Color.red;
+            endColor = Color.yellow;
+            mainModule.startColor = Color.Lerp(startColor, endColor, value * 2);
         }
+        else
+        {
+            startColor = Color.yellow;
+            endColor = Color.cyan;
+            mainModule.startColor = Color.Lerp(startColor, endColor, (value - 0.5f) * 2);
+        }
+
+        temperatureText.text = temperature.ToString("F0") + "°C";
     }
+
+
+
 }
