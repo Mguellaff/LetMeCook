@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 159-1593993_first-person-hands-transparent-hd-png-download-removebg-preview_0
+      name: leftHand
       rect:
         serializedVersion: 2
         x: 0
@@ -118,20 +118,20 @@ TextureImporter:
         width: 285
         height: 438
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd0355aa4f3f9fe45b94d48d7545f543
-      internalID: -1627279839
+      spriteID: 524485b8b7877b040bc3e7c937b5e5ca
+      internalID: 2031354889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 159-1593993_first-person-hands-transparent-hd-png-download-removebg-preview_1
+      name: rightHand
       rect:
         serializedVersion: 2
         x: 285
@@ -139,14 +139,14 @@ TextureImporter:
         width: 285
         height: 438
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 928af223577730848ab710cfba1eb2e1
-      internalID: -2106767485
+      spriteID: aef1322f997ec1a4c99e989eb9367a44
+      internalID: 1696250076
       vertices: []
       indices: 
       edges: []
@@ -162,8 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      159-1593993_first-person-hands-transparent-hd-png-download-removebg-preview_0: -1627279839
-      159-1593993_first-person-hands-transparent-hd-png-download-removebg-preview_1: -2106767485
+      leftHand: 2031354889
+      rightHand: 1696250076
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

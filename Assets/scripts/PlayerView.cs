@@ -46,7 +46,9 @@ public class PlayerView : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.CompareTag("Interactable"))
+            int interactableLayer = LayerMask.NameToLayer("Interactable");
+
+            if (hit.collider.gameObject.layer == interactableLayer)
             {
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
                 if (interactable != null)
@@ -71,5 +73,7 @@ public class PlayerView : MonoBehaviour
             lastInteractable = null;
         }
     }
+
+
 
 }
