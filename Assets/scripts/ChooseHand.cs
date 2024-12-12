@@ -9,6 +9,12 @@ public class ChooseHand : MonoBehaviour
     private string parentName;
     private GameObject ingredient;
     private Container container;
+    private Sprite[] handSprites;
+
+    private void Start()
+    {
+        handSprites = Resources.LoadAll<Sprite>("Hands");
+    }
     public void Choose(int hand)
     {
         parentName = transform.parent.name;
@@ -17,67 +23,63 @@ public class ChooseHand : MonoBehaviour
         {
             if (hand == 0)
             {
-                rightHand.sprite = Resources.Load<Sprite>(resourcePath);
+                leftHand.sprite = Resources.Load<Sprite>(resourcePath);
                 transform.parent.position = new Vector3(0, -10, 0);
             }
             else if (hand == 1)
             {
-                leftHand.sprite = Resources.Load<Sprite>(resourcePath);
+                rightHand.sprite = Resources.Load<Sprite>(resourcePath);
                 transform.parent.position = new Vector3(0, -10, 0);
             }
         }
         else if (transform.parent.tag == "Container")
         {
-            Sprite[] handSprites = Resources.LoadAll<Sprite>("hands");
             container = transform.parent.GetComponent<Container>();
 
             if (hand == 0)
             {
-                ingredient = GameObject.Find(leftHand.sprite.name);
-
-                if (ingredient != null)
-                {
-                    container.AddIngredient(ingredient);
-                }
-
-                Transform child = transform.parent.GetComponentInChildren<Transform>();
-                Debug.Log(child);
-                if (child != null && child.tag == "Grabable")
-                {
-                    Debug.Log(child.name);
-                    leftHand.sprite = Resources.Load<Sprite>(child.name);
-                    container.EmptyContainer();
-                }
-                else
-                {
-                    leftHand.sprite = System.Array.Find(handSprites, sprite => sprite.name == "leftHand");
-                }
+                ContainerSprite(leftHand, "leftHand");
             }
             else if (hand == 1)
             {
-                ingredient = GameObject.Find(rightHand.sprite.name);
-
-                if (ingredient != null)
-                {
-                    container.AddIngredient(ingredient);
-                }
-
-                Transform child = transform.parent.GetComponentInChildren<Transform>();
-                Debug.Log(child);
-                if (child != null && child.tag == "Grabable")
-                {
-                    Debug.Log(child.name);
-                    rightHand.sprite = Resources.Load<Sprite>(child.name);
-                    container.EmptyContainer();
-                }
-                else
-                {
-                    rightHand.sprite = System.Array.Find(handSprites, sprite => sprite.name == "rightHand");
-                }
+                ContainerSprite(rightHand, "rightHand");
             }
         }
     }
 
+    private void ContainerSprite(Image hand,string name)
+    {
+        if (hand.sprite.name == name && !container.IsEmpty())
+        {
+            Transform child = transform.parent.GetComponentInChildren<Transform>();
+            if (child != null && child.tag == "Grabable")
+            {
+                Debug.Log($"Child is Grabable, name: {child.name}");
+                hand.sprite = Resources.Load<Sprite>(child.name);
+                container.EmptyContainer();
+            }
+        }
+        else
+        {
+            ingredient = GameObject.Find(hand.sprite.name);
 
+            if (ingredient != null)
+            {
+                container.AddIngredient(ingredient);
+            }
+
+            Transform child = transform.parent.GetComponentInChildren<Transform>();
+
+            if (child != null && child.tag == "Grabable")
+            {
+                hand.sprite = Resources.Load<Sprite>(child.name);
+                container.EmptyContainer();
+            }
+            else
+            {
+                hand.sprite = System.Array.Find(handSprites, sprite => sprite.name == name);
+            }
+        }
+    }
 
 }
