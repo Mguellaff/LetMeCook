@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class RecipeManager : MonoBehaviour
 {
@@ -11,31 +12,64 @@ public class RecipeManager : MonoBehaviour
     [SerializeField] private Image recipeImageLeft;
     [SerializeField] private TextMeshProUGUI recipeTextRight;
     [SerializeField] private Image recipeImageRight;
-
+    private int recipeNumber;
+    private int maxRecipes;
     private void Start()
     {
-        DisplayRecipes();
+        maxRecipes = recipes.Count;
+        Debug.Log("maxRecipes=" + maxRecipes);
+        DisplayRecipes(recipeNumber);
     }
 
-    private void DisplayRecipes()
+    private void DisplayRecipes(int i)
     {
-            recipeTextLeft.text = recipes[0].title + "\n" + recipes[0].description + "\n" + IngredientsString(0);
-            recipeImageLeft.sprite = recipes[0].image; 
-        recipeTextRight.text = recipes[1].title + "\n" + recipes[1].description + "\n" + IngredientsString(1);
-        recipeImageRight.sprite = recipes[1].image;
+        if(i>maxRecipes)
+        {
+            recipeTextLeft.text = null;
+            recipeImageLeft.enabled = false;
+            recipeTextRight.text = null;
+            recipeImageRight.enabled = false; 
+        }
+        else
+        {
+            recipeTextLeft.text = recipes[i].title + "\n\n" + recipes[i].description + "\n\n" + IngredientsString(i);
+            recipeImageLeft.enabled = true;
+            recipeImageLeft.sprite = recipes[i].image;
+            if (i + 1 >= maxRecipes)
+            {
+                recipeTextRight.text = null;
+                recipeImageRight.enabled = false;
+                return;
+            }
+            else
+            {
+                recipeTextRight.text = recipes[i + 1].title + "\n\n" + recipes[i + 1].description + "\n\n" + IngredientsString(i + 1);
+                recipeImageRight.enabled = true;
+                recipeImageRight.sprite = recipes[i + 1].image;
+            }
+        }
     }
     private string IngredientsString(int i)
     {
         string ingredients = "";
         foreach (string ingredient in recipes[i].ingredients)
         {
-            ingredients += ingredient + "\n";
+            ingredients += "- "+ ingredient + "\n";
         }
         return ingredients;
     }
 
-    private void TurnPages()
+    public void TurnPages(int i)
     {
-        
+        if (i==0 && recipeNumber > 0)
+        {
+            recipeNumber -= 2;
+            DisplayRecipes(recipeNumber);
+        }
+        else if (i == 1 && recipeNumber < maxRecipes)
+        {
+            recipeNumber += 2;
+            DisplayRecipes(recipeNumber);
+        }
     }
 }
