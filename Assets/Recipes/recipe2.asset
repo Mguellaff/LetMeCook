@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3717ab03159914ab4c0fb9f1ccae6c, type: 3}
   m_Name: recipe2
   m_EditorClassIdentifier: 
-  title: NOOONNN NEMOOOO
-  description: c'est lui
+  title: Ton poisson rouge
+  description: "Je te l'ai vol\xE9 ce matin"
   ingredients:
-  - nemo cuit
-  - des petites fritasses
+  - "Ton poisson cuit \xE0 la po\xEBle"
+  - Des petites fritasses
   image: {fileID: 21300000, guid: 97deae6238ce04d44b10382197bca6b5, type: 3}

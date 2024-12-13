@@ -21,19 +21,15 @@ public class PlayerView : MonoBehaviour
 
     void Update()
     {
-        // Obtenir les mouvements de la souris
         mouseLook = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
-        // Appliquer la rotation en fonction des mouvements de la souris
         transform.Rotate(Vector3.up * mouseLook.x);
         cam.transform.Rotate(Vector3.right * -mouseLook.y);
 
-        // Déplacer la souris au centre du jeu
         Vector3 centerGame = cam.WorldToScreenPoint(transform.position);
         Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Confined;
 
-        // Déplacer la souris au centre de l'écran
         Input.mousePosition.Set(centerGame.x, centerGame.y, 0);
     }
 

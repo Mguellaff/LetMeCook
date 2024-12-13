@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3717ab03159914ab4c0fb9f1ccae6c, type: 3}
   m_Name: recipe1
   m_EditorClassIdentifier: 
-  title: "Pleure sur \xE7a"
-  description: du bon poulet mmhhhm miam :P
+  title: "Poulet cram\xE9"
+  description: Ca donne envie
   ingredients:
-  - "poulet bien cuit bien cram\xE9"
-  - "une patate coup\xE9e en tranches"
+  - "Poulet bien cuit bien cram\xE9"
+  - "Une patate coup\xE9e en tranches"
   image: {fileID: 21300000, guid: 23489a2365c48714fafcc1c9f11e3a89, type: 3}

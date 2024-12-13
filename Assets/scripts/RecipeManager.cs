@@ -14,6 +14,8 @@ public class RecipeManager : MonoBehaviour
     [SerializeField] private Image recipeImageRight;
     private int recipeNumber;
     private int maxRecipes;
+    [SerializeField] private Canvas recipeCanvas;
+    private bool recipeCanvasOpen=false;
     private void Start()
     {
         maxRecipes = recipes.Count;
@@ -32,7 +34,7 @@ public class RecipeManager : MonoBehaviour
         }
         else
         {
-            recipeTextLeft.text = recipes[i].title + "\n\n" + recipes[i].description + "\n\n" + IngredientsString(i);
+            recipeTextLeft.text = recipes[i].title;//recipes[i].description + "\n\n" + IngredientsString(i);
             recipeImageLeft.enabled = true;
             recipeImageLeft.sprite = recipes[i].image;
             if (i + 1 >= maxRecipes)
@@ -43,7 +45,7 @@ public class RecipeManager : MonoBehaviour
             }
             else
             {
-                recipeTextRight.text = recipes[i + 1].title + "\n\n" + recipes[i + 1].description + "\n\n" + IngredientsString(i + 1);
+                recipeTextRight.text = recipes[i + 1].title;
                 recipeImageRight.enabled = true;
                 recipeImageRight.sprite = recipes[i + 1].image;
             }
@@ -71,5 +73,37 @@ public class RecipeManager : MonoBehaviour
             recipeNumber += 2;
             DisplayRecipes(recipeNumber);
         }
+    }
+
+    public void OpenRecipe(bool isLeft)
+    {
+        Debug.Log("openrecipe");
+        recipeCanvasOpen = !recipeCanvasOpen;
+        recipeCanvas.gameObject.SetActive(recipeCanvasOpen);
+        GameObject recipeTitleObject = GameObject.Find("recipeTitle");
+        TextMeshProUGUI recipeTitle = recipeTitleObject.GetComponent<TextMeshProUGUI>();
+        GameObject recipeTextObject = GameObject.Find("recipeText");
+        TextMeshProUGUI recipeText = recipeTextObject.GetComponent<TextMeshProUGUI>();
+        GameObject recipeImageObject = GameObject.Find("recipeImage");
+        Image recipeImage = recipeImageObject.GetComponent<Image>();
+
+        if (isLeft)
+        {
+            recipeTitle.text = recipes[recipeNumber].title;
+            recipeText.text = recipes[recipeNumber].description + "\n\n" + IngredientsString(recipeNumber);
+            recipeImage.sprite = recipes[recipeNumber].image;
+        }
+        else
+        {
+            recipeTitle.text = recipes[recipeNumber + 1].title;
+            recipeText.text = recipes[recipeNumber + 1].description + "\n\n" + IngredientsString(recipeNumber + 1);
+            recipeImage.sprite = recipes[recipeNumber + 1].image;
+        }
+    }
+
+    public void CloseRecipe()
+    {
+        recipeCanvasOpen = false;
+        recipeCanvas.gameObject.SetActive(recipeCanvasOpen);
     }
 }

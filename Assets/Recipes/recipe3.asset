@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3717ab03159914ab4c0fb9f1ccae6c, type: 3}
   m_Name: recipe3
   m_EditorClassIdentifier: 
-  title: la vache qui rit plus
+  title: Marguerite
   description: "elle est d\xE9c\xE9d\xE9e (RIP)"
   ingredients:
-  - un morceau de son cadavre cru
-  - une fleur pour lui rendre hommage
+  - Un morceau de son cadavre cru
+  - Une fleur pour lui rendre hommage
   image: {fileID: 21300000, guid: 4c89cfd5a344a77419be43680f0b5514, type: 3}

@@ -41,6 +41,9 @@ heatSlider.onValueChanged.AddListener(OnSliderValueChanged);
         temperatureText.text = temperature.ToString("F0") + "°C";
     }
 
-
+    public float GetTemperature()
+    {
+        return temperature;
+    }
 
 }
