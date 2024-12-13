@@ -15,6 +15,7 @@ public class RecipeManager : MonoBehaviour
     private int recipeNumber;
     private int maxRecipes;
     [SerializeField] private Canvas recipeCanvas;
+    [SerializeField] private Canvas createRecipeCanvas;
     private bool recipeCanvasOpen=false;
     private void Start()
     {
@@ -105,5 +106,15 @@ public class RecipeManager : MonoBehaviour
     {
         recipeCanvasOpen = false;
         recipeCanvas.gameObject.SetActive(recipeCanvasOpen);
+    }
+
+    public void CloseCreateRecipe()
+    {
+        createRecipeCanvas.gameObject.SetActive(false);
+    }
+
+    public void OpenCreateRecipe()
+    {
+        createRecipeCanvas.gameObject.SetActive(true);
     }
 }

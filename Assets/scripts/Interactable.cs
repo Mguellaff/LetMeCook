@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
     private bool isFocused;   
     private Outline outline;
-    private GameObject leftOrRightCanvas;
+    [SerializeField] private GameObject leftOrRightCanvas;
     private PlayerView playerView;
+    [SerializeField] private Vector3 createButtonOffset;
     void Start()
     {
-        outline = GetComponent<Outline>();
-        leftOrRightCanvas = GameObject.Find("WhichHandCanvas");
+        outline = GetComponent<Outline>(); 
+        if (leftOrRightCanvas == null)
+        {
+            leftOrRightCanvas = GameObject.Find("WhichHandCanvas");
+        }
         playerView = GameObject.Find("player").GetComponent<PlayerView>();
     }
 
@@ -38,7 +43,14 @@ public class Interactable : MonoBehaviour
     {
         leftOrRightCanvas.SetActive(true);
         leftOrRightCanvas.transform.SetParent(transform);
+        if (leftOrRightCanvas == GameObject.Find("WhichHandCanvas"))
+        { 
         leftOrRightCanvas.transform.localPosition = new Vector3(0, 1.5f, 0);
+        }
+        else
+        {
+            leftOrRightCanvas.transform.localPosition = createButtonOffset;
+        }
     }
 
     public void RemoveCanvas()
