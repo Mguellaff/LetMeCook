@@ -47,15 +47,28 @@ public class ChooseHand : MonoBehaviour
         }
     }
 
-    private void ContainerSprite(Image hand,string name)
+    private void ContainerSprite(Image hand, string name)
     {
+        Debug.Log($"ContainerSprite called with hand: {hand.name}, name: {name}");
+
+        // si le container a un ingrédient et que la main est vide
         if (hand.sprite.name == name && !container.IsEmpty())
         {
-            Transform child = transform.parent.GetComponentInChildren<Transform>();
-            if (child != null && child.tag == "Grabable")
+            Transform ingredient = null;
+            foreach (Transform child in transform.parent)
             {
-                Debug.Log($"Child is Grabable, name: {child.name}");
-                hand.sprite = Resources.Load<Sprite>(child.name);
+                if (child.tag == "Grabable")
+                {
+                    ingredient = child;
+                    break;
+                }
+            }
+            Debug.Log($"ingredient found: {ingredient?.name}, tag: {ingredient?.tag}");
+
+            if (ingredient != null && ingredient.tag == "Grabable")
+            {
+                Debug.Log($"ingredient is Grabable, name: {ingredient.name}");
+                hand.sprite = Resources.Load<Sprite>(ingredient.name);
                 container.EmptyContainer();
             }
         }
@@ -69,17 +82,10 @@ public class ChooseHand : MonoBehaviour
             }
 
             Transform child = transform.parent.GetComponentInChildren<Transform>();
-
-            if (child != null && child.tag == "Grabable")
-            {
-                hand.sprite = Resources.Load<Sprite>(child.name);
-                container.EmptyContainer();
-            }
-            else
-            {
-                hand.sprite = System.Array.Find(handSprites, sprite => sprite.name == name);
-            }
+            hand.sprite = System.Array.Find(handSprites, sprite => sprite.name == name);
         }
     }
 
 }
+
+
