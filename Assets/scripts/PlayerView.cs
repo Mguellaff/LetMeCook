@@ -14,8 +14,7 @@ public class PlayerView : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-
-        Debug.Log(Input.mousePosition);
+        //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
     }
 
@@ -31,6 +30,10 @@ public class PlayerView : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
 
         Input.mousePosition.Set(centerGame.x, centerGame.y, 0);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            MouseLock();
+        }
     }
 
 
@@ -67,6 +70,20 @@ public class PlayerView : MonoBehaviour
         {
             lastInteractable.OnRayExit(ray.origin);
             lastInteractable = null;
+        }
+    }
+
+    private void MouseLock()
+    {
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else if (Cursor.lockState != CursorLockMode.Confined)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 

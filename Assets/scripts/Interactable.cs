@@ -41,17 +41,28 @@ public class Interactable : MonoBehaviour
 
     public void PlaceCanvas()
     {
+        if (gameObject.tag == "Door")
+        {
+            OpenDoor();
+            return; 
+        }
+
         leftOrRightCanvas.SetActive(true);
         leftOrRightCanvas.transform.SetParent(transform);
-        if (leftOrRightCanvas == GameObject.Find("WhichHandCanvas"))
-        { 
-        leftOrRightCanvas.transform.localPosition = new Vector3(0, 1.5f, 0);
+        if (leftOrRightCanvas == GameObject.Find("WhichHandCanvas") && gameObject.tag!=null)
+        {
+            leftOrRightCanvas.transform.localPosition = new Vector3(0, 1.5f, 0);
         }
-        else
+        else if(gameObject.tag == null)
+        {
+            leftOrRightCanvas.transform.localPosition = new Vector3(0, 5, 0);
+        }
+        else 
         {
             leftOrRightCanvas.transform.localPosition = createButtonOffset;
         }
     }
+
 
     public void RemoveCanvas()
     {
@@ -59,5 +70,12 @@ public class Interactable : MonoBehaviour
         leftOrRightCanvas.transform.SetParent(null);
     }
 
+    public void OpenDoor()
+    {
+        if (isFocused)
+        {
+            //Animation.start();
+        }
+    }
 
 }

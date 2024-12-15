@@ -45,6 +45,20 @@ public class ChooseHand : MonoBehaviour
                 ContainerSprite(rightHand, "rightHand");
             }
         }
+        else
+        {
+            Debug.Log("Trash");
+            if (hand == 0)
+            {
+                leftHand.sprite = Resources.Load<Sprite>(resourcePath);
+                transform.parent.position = new Vector3(0, -10, 0);
+            }
+            else if (hand == 1)
+            {
+                rightHand.sprite = Resources.Load<Sprite>(resourcePath);
+                transform.parent.position = new Vector3(0, -10, 0);
+            }
+        }
     }
 
     private void ContainerSprite(Image hand, string name)

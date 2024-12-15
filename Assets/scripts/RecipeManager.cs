@@ -117,4 +117,9 @@ public class RecipeManager : MonoBehaviour
     {
         createRecipeCanvas.gameObject.SetActive(true);
     }
+
+    public List<Recipe> GetRecipes()
+    {
+        return recipes;
+    }
 }
