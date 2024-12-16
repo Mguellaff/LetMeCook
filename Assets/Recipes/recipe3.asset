@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: recipe3
   m_EditorClassIdentifier: 
   title: Marguerite
-  description: "elle est d\xE9c\xE9d\xE9e (RIP)"
+  description: "Elle est d\xE9c\xE9d\xE9e (RIP)"
   ingredients:
   - Un morceau de son cadavre cru
   - Une fleur pour lui rendre hommage

@@ -24,7 +24,7 @@ public class RecipeManager : MonoBehaviour
         DisplayRecipes(recipeNumber);
     }
 
-    private void DisplayRecipes(int i)
+    public void DisplayRecipes(int i)
     {
         if(i>maxRecipes)
         {
@@ -35,7 +35,7 @@ public class RecipeManager : MonoBehaviour
         }
         else
         {
-            recipeTextLeft.text = recipes[i].title;//recipes[i].description + "\n\n" + IngredientsString(i);
+            recipeTextLeft.text = recipes[i].title;
             recipeImageLeft.enabled = true;
             recipeImageLeft.sprite = recipes[i].image;
             if (i + 1 >= maxRecipes)
