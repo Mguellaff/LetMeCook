@@ -25,6 +25,7 @@ public class Interactable : MonoBehaviour
     {
         isFocused = true;
         outline.enabled = true;
+        Debug.Log("OnRayEnter");
         PlaceCanvas();
     }
 
@@ -60,6 +61,7 @@ public class Interactable : MonoBehaviour
         else 
         {
             leftOrRightCanvas.transform.localPosition = createButtonOffset;
+            Debug.Log("Place create recipe canvas");
         }
     }
 

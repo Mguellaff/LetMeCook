@@ -64,17 +64,18 @@ public class RecipeManager : MonoBehaviour
 
     public void TurnPages(int i)
     {
-        if (i==0 && recipeNumber > 0)
+        if (i == 0 && recipeNumber > 0)
         {
             recipeNumber -= 2;
             DisplayRecipes(recipeNumber);
         }
-        else if (i == 1 && recipeNumber < maxRecipes)
+        else if (i == 1 && recipeNumber + 2 < maxRecipes)
         {
             recipeNumber += 2;
             DisplayRecipes(recipeNumber);
         }
     }
+
 
     public void OpenRecipe(bool isLeft)
     {
@@ -90,17 +91,32 @@ public class RecipeManager : MonoBehaviour
 
         if (isLeft)
         {
-            recipeTitle.text = recipes[recipeNumber].title;
-            recipeText.text = recipes[recipeNumber].description + "\n\n" + IngredientsString(recipeNumber);
-            recipeImage.sprite = recipes[recipeNumber].image;
+            if (recipeNumber < recipes.Count)
+            {
+                recipeTitle.text = recipes[recipeNumber].title;
+                recipeText.text = recipes[recipeNumber].description + "\n\n" + IngredientsString(recipeNumber);
+                recipeImage.sprite = recipes[recipeNumber].image;
+            }
+            else
+            {
+                Debug.LogWarning("Index out of range: recipeNumber is greater than the number of recipes.");
+            }
         }
         else
         {
-            recipeTitle.text = recipes[recipeNumber + 1].title;
-            recipeText.text = recipes[recipeNumber + 1].description + "\n\n" + IngredientsString(recipeNumber + 1);
-            recipeImage.sprite = recipes[recipeNumber + 1].image;
+            if (recipeNumber + 1 < recipes.Count)
+            {
+                recipeTitle.text = recipes[recipeNumber + 1].title;
+                recipeText.text = recipes[recipeNumber + 1].description + "\n\n" + IngredientsString(recipeNumber + 1);
+                recipeImage.sprite = recipes[recipeNumber + 1].image;
+            }
+            else
+            {
+                Debug.LogWarning("Index out of range: recipeNumber + 1 is greater than the number of recipes.");
+            }
         }
     }
+
 
     public void CloseRecipe()
     {
