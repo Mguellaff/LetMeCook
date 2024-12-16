@@ -7,8 +7,9 @@ public class Interactable : MonoBehaviour
     [SerializeField] private GameObject leftOrRightCanvas;
     private PlayerView playerView;
     [SerializeField] private Vector3 createButtonOffset;
-    [SerializeField] private float removeCanvasDelay = 2.0f;
+    [SerializeField] private float removeCanvasDelay = 4.0f;
     private Animator animator;
+    [SerializeField] private Canvas doorCanvas; 
     void Start()
     {
         outline = GetComponent<Outline>(); 
@@ -98,10 +99,7 @@ public class Interactable : MonoBehaviour
 
     public void OpenDoor()
     {
-        if (isFocused)
-        {
-            //Animation.start();
-        }
+        doorCanvas.enabled = true;
     }
 
 }

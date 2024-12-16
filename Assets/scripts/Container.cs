@@ -35,10 +35,28 @@ public class Container : MonoBehaviour
         if (!isEmpty)
         {
             isEmpty = true;
+            List<Transform> childrenToRemove = new List<Transform>();
+
             foreach (Transform child in transform)
             {
-                child.gameObject.transform.position=new Vector3(0,-10,0);
+                if (child.tag == "Grabable")
+                {
+                    childrenToRemove.Add(child);
+                }
+            }
+            for (int i = 0; i < childrenToRemove.Count; i++)
+            {
+                Debug.Log("Removing child: " + childrenToRemove[i].gameObject.name);
+            }
+
+            foreach (Transform child in childrenToRemove)
+            {
+                child.SetParent(null);
+                child.position = new Vector3(0, -10, 0);
             }
         }
     }
+
+
+
 }
