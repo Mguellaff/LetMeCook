@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plate : MonoBehaviour
-{
+public class Plate : Interactable 
+{ 
     void Start()
     {
         
