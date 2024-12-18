@@ -12,6 +12,7 @@ public class Interactable : MonoBehaviour
     [SerializeField] private float removeCanvasDelay = 4.0f;
     private Animator animator;
     [SerializeField] private Canvas doorCanvas; 
+    private Animator doorAnimator;
     void Start()
     {
         outline = GetComponent<Outline>(); 
@@ -48,6 +49,7 @@ public class Interactable : MonoBehaviour
     {
         if (gameObject.tag == "Door")
         {
+            doorAnimator=gameObject.GetComponent<Animator>();
             OpenDoor();
             return;
         }
@@ -103,8 +105,15 @@ public class Interactable : MonoBehaviour
     {
        if(Input.GetMouseButtonDown(0))
         {
+            doorAnimator.SetBool("IsOpen", true);
             doorCanvas.gameObject.SetActive(true);
+
         }
+    }
+    public void CloseDoor()
+    {
+        doorAnimator.SetBool("IsOpen", false);
+        doorCanvas.gameObject.SetActive(false);
     }
 
 }

@@ -9,37 +9,53 @@ public class PlayerView : MonoBehaviour
     Camera cam;
     Vector2 mouseLook;
     private Interactable lastInteractable;
-
+    private bool rotate = true;
+    private bool isCursorVisible = false;
     [SerializeField] public float maxDistance;
+    private GameObject player;
+    private PlayerMovement playerMovement;
+
     void Start()
     {
         cam = Camera.main;
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.visible = isCursorVisible;
+        Cursor.lockState = CursorLockMode.Confined;
+        player = GameObject.Find("player");
+        playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
         mouseLook = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
-        transform.Rotate(Vector3.up * mouseLook.x);
-        cam.transform.Rotate(Vector3.right * -mouseLook.y);
+        RotateCamera(rotate);
 
-        Vector3 centerGame = cam.WorldToScreenPoint(transform.position);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.lockState = CursorLockMode.Confined;
-
-        Input.mousePosition.Set(centerGame.x, centerGame.y, 0);
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            MouseLock();
+            playerMovement.SwitchMovement();
+            isCursorVisible = !isCursorVisible;
+            Cursor.visible = isCursorVisible;
+            Debug.Log("Cursor visible: " + Cursor.visible);
+            rotate = !rotate;
+            RotateCamera(rotate);
+            if(Cursor.lockState == CursorLockMode.Confined)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+            }
         }
     }
 
 
 
+
     private void FixedUpdate()
     {
+        if(Cursor.lockState == CursorLockMode.None)
+        {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -71,22 +87,20 @@ public class PlayerView : MonoBehaviour
             lastInteractable.OnRayExit(ray.origin);
             lastInteractable = null;
         }
+        }
     }
 
-    private void MouseLock()
+    private void RotateCamera(bool rotate)
     {
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
+        if(rotate)
+        { 
+        transform.Rotate(Vector3.up * mouseLook.x);
+        cam.transform.Rotate(Vector3.right * -mouseLook.y);
         }
-        else if (Cursor.lockState != CursorLockMode.Confined)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+        else {
+            transform.Rotate(Vector3.up * 0);
+            cam.transform.Rotate(Vector3.right * 0);
         }
     }
-
-
 
 }
