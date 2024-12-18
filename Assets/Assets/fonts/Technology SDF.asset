@@ -1881,9 +1881,9 @@ MonoBehaviour:
     packingMode: 0
     atlasWidth: 512
     atlasHeight: 512
-    characterSetSelectionMode: 0
-    characterSequence: 32 - 126, 160, 8203, 8230, 9633
-    referencedFontAssetGUID: 
+    characterSetSelectionMode: 7
+    characterSequence: " !\"$(),-.0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\xE9\xEF\xE0"
+    referencedFontAssetGUID: 3add44d32cfd094419d261bc1a6adb1d
     referencedTextAssetGUID: 
     fontStyle: 0
     fontStyleModifier: 0
