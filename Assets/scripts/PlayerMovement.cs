@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed;
     private Camera cam;
+    private bool canMove = true;
 
     void Start()
     {
@@ -16,16 +14,27 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        if (canMove) 
+        {
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 move = cam.transform.right * moveHorizontal + cam.transform.forward * moveVertical;
-        move.y = 0; 
-        controller.Move(move * Time.deltaTime * speed);
+            Vector3 move = cam.transform.right * moveHorizontal + cam.transform.forward * moveVertical;
+            move.y = 0;
+            controller.Move(move * Time.deltaTime * speed);
+        }
+        else
+        {
+            controller.Move(Vector3.zero);
+        }
     }
 
+    public void SwitchMovement()
+    {
+        canMove = !canMove; 
+    }
 
 }
+

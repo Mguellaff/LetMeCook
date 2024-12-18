@@ -12,13 +12,13 @@ public class DisableMovement : MonoBehaviour
     }
     private void OnEnable()
     {
-        movement.enabled = false;
+        movement.SwitchMovement();
         view.enabled = false;
     }
 
     private void OnDisable()
     {
-        movement.enabled = true;
+        movement.SwitchMovement();
         view.enabled = true;
     }
 }

@@ -7,6 +7,7 @@ TagManager:
   - Interactable
   - Grabable
   - Container
+  - Door
   layers:
   - Default
   - TransparentFX

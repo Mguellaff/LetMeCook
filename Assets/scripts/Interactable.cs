@@ -1,4 +1,6 @@
-using System.Collections;using UnityEngine;
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
@@ -99,7 +101,10 @@ public class Interactable : MonoBehaviour
 
     public void OpenDoor()
     {
-        doorCanvas.enabled = true;
+       if(Input.GetMouseButtonDown(0))
+        {
+            doorCanvas.gameObject.SetActive(true);
+        }
     }
 
 }
