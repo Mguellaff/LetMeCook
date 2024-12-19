@@ -9,6 +9,7 @@ public class Ingredient : MonoBehaviour
     private GameObject ingredientHeatSlider;
     private Slider slider;
     private MeshFilter meshFilter;
+    private string meshName;
     void Start()
     {
         GameObject stove = GameObject.Find("stove");
@@ -22,28 +23,37 @@ public class Ingredient : MonoBehaviour
         ingredientHeatSlider = GetComponentInChildren<Canvas>().gameObject;
         slider=ingredientHeatSlider.GetComponentInChildren<Slider>();
         ingredientHeatSlider.SetActive(false);
-
-        slider.value = cooked; 
+ 
         meshFilter = GetComponent<MeshFilter>();
+        meshName= meshFilter.mesh.name;
     }
 
     void Update()
     {
-
         if (IsParentContainer() && heatSlider != null)
         {
             ingredientHeatSlider.SetActive(true);
             temperature = heatSlider.GetTemperature();
-            Debug.Log(temperature);
-            cooked += temperature/10 * Time.deltaTime * 100;
+            cooked += temperature / 10 * Time.deltaTime * 100;
+            slider.value = cooked;
 
             if (cooked > 15000)
             {
-                meshFilter.mesh.name = meshFilter.mesh.name.Replace("Raw", "Burned");
+                Debug.Log("Burned");
+                Mesh burntMesh = Resources.Load<Mesh>($"Meshes/{meshName}Burnt");
+                if (burntMesh != null)
+                {
+                    meshFilter.mesh = burntMesh;
+                }
             }
             else if (cooked > 5500)
             {
-                meshFilter.mesh.name = meshFilter.mesh.name.Replace("Raw", "Cooked");
+                Debug.Log("Cooked");
+                Mesh cookedMesh = Resources.Load<Mesh>($"Meshes/{meshName}Cooked");
+                if (cookedMesh != null)
+                {
+                    meshFilter.mesh = cookedMesh;
+                }
             }
         }
         else
@@ -51,6 +61,8 @@ public class Ingredient : MonoBehaviour
             ingredientHeatSlider.SetActive(false);
         }
     }
+
+
 
     private bool IsParentContainer()
     {
