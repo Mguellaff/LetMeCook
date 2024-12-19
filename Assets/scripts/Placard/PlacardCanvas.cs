@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class PlacardEtage
 {
     public List<Image> kitchenItems = new List<Image>();
@@ -26,8 +27,7 @@ public class PlacardCanvas : MonoBehaviour
         rightHandImage.sprite = rightHandSprite.sprite;
         handSprites = Resources.LoadAll<Sprite>("Hands");
 
-        // Initialiser les étages
-        for (int i = 0; i < 3; i++) // Par exemple, 3 étages
+        for (int i = 0; i < 3; i++)
         {
             PlacardEtage etage = new PlacardEtage();
             foreach (Transform child in panel2.transform)
@@ -38,7 +38,7 @@ public class PlacardCanvas : MonoBehaviour
 
             // Créer un bouton pour chaque étage
             GameObject button = Instantiate(etageButtonPrefab, etageButtonContainer);
-            button.GetComponentInChildren<Text>().text = "Étage " + (i + 1);
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "Étage " + (i + 1);
             int index = i;
             button.GetComponent<Button>().onClick.AddListener(() => SelectEtage(index));
         }

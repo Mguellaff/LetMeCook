@@ -8,7 +8,7 @@ public class Ingredient : MonoBehaviour
     private float cooked;
     private GameObject ingredientHeatSlider;
     private Slider slider;
-
+    private MeshFilter meshFilter;
     void Start()
     {
         GameObject stove = GameObject.Find("stove");
@@ -23,6 +23,8 @@ public class Ingredient : MonoBehaviour
         slider=ingredientHeatSlider.GetComponentInChildren<Slider>();
         ingredientHeatSlider.SetActive(false);
 
+        slider.value = cooked; 
+        meshFilter = GetComponent<MeshFilter>();
     }
 
     void Update()
@@ -32,14 +34,16 @@ public class Ingredient : MonoBehaviour
         {
             ingredientHeatSlider.SetActive(true);
             temperature = heatSlider.GetTemperature();
-
+            Debug.Log(temperature);
             cooked += temperature/10 * Time.deltaTime * 100;
-            slider.value = cooked;
+
             if (cooked > 15000)
             {
+                meshFilter.mesh.name = meshFilter.mesh.name.Replace("Raw", "Burned");
             }
             else if (cooked > 5500)
             {
+                meshFilter.mesh.name = meshFilter.mesh.name.Replace("Raw", "Cooked");
             }
         }
         else
