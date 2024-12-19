@@ -46,7 +46,7 @@ public class Container : MonoBehaviour
             }
             for (int i = 0; i < childrenToRemove.Count; i++)
             {
-                Debug.Log("Removing child: " + childrenToRemove[i].gameObject.name);
+
             }
 
             foreach (Transform child in childrenToRemove)

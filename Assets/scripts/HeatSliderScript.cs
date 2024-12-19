@@ -22,7 +22,6 @@ public class HeatSliderScript : MonoBehaviour
     void OnSliderValueChanged(float value)
     {
         temperature = value * 100 + 50;
-        Debug.Log("OnSliderValueChanged called, temperature=" + temperature);
         switchTransform.rotation = Quaternion.Euler(0, 0, 180 * value);
         Color startColor;
         Color endColor;
@@ -45,7 +44,6 @@ public class HeatSliderScript : MonoBehaviour
 
     public float GetTemperature()
     {
-        Debug.Log("GetTemperature called, returning temperature=" + temperature);
         return temperature;
     }
 }

@@ -15,11 +15,9 @@ public class Ingredient : MonoBehaviour
         if (stove != null)
         {
             heatSlider = stove.GetComponentInChildren<HeatSliderScript>();
-            Debug.Log("heatSlider found: " + heatSlider);
         }
         else
         {
-            Debug.LogError("Stove not found");
         }
         ingredientHeatSlider = GetComponentInChildren<Canvas>().gameObject;
         slider=ingredientHeatSlider.GetComponentInChildren<Slider>();
@@ -29,23 +27,19 @@ public class Ingredient : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("IsParentContainer()=" + IsParentContainer());
 
         if (IsParentContainer() && heatSlider != null)
         {
             ingredientHeatSlider.SetActive(true);
             temperature = heatSlider.GetTemperature();
-            Debug.Log("temperature=" + temperature);
 
             cooked += temperature/10 * Time.deltaTime * 100;
             slider.value = cooked;
             if (cooked > 15000)
             {
-                Debug.Log("c'est cramé");
             }
             else if (cooked > 5500)
             {
-                Debug.Log("c'est cuit");
             }
         }
         else

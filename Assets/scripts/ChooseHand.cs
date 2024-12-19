@@ -47,7 +47,6 @@ public class ChooseHand : MonoBehaviour
         }
         else
         {
-            Debug.Log("Trash");
             if (hand == 0)
             {
                 leftHand.sprite = Resources.Load<Sprite>(resourcePath);
@@ -63,7 +62,6 @@ public class ChooseHand : MonoBehaviour
 
     private void ContainerSprite(Image hand, string name)
     {
-        Debug.Log($"ContainerSprite called with hand: {hand.name}, name: {name}");
 
         // si le container a un ingrédient et que la main est vide
         if (hand.sprite.name == name && !container.IsEmpty())
@@ -77,11 +75,9 @@ public class ChooseHand : MonoBehaviour
                     break;
                 }
             }
-            Debug.Log($"ingredient found: {ingredient?.name}, tag: {ingredient?.tag}");
 
             if (ingredient != null && ingredient.tag == "Grabable")
             {
-                Debug.Log($"ingredient is Grabable, name: {ingredient.name}");
                 hand.sprite = Resources.Load<Sprite>(ingredient.name);
                 container.EmptyContainer();
             }
