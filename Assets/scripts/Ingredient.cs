@@ -17,15 +17,12 @@ public class Ingredient : MonoBehaviour
         {
             heatSlider = stove.GetComponentInChildren<HeatSliderScript>();
         }
-        else
-        {
-        }
         ingredientHeatSlider = GetComponentInChildren<Canvas>().gameObject;
-        slider=ingredientHeatSlider.GetComponentInChildren<Slider>();
+        slider = ingredientHeatSlider.GetComponentInChildren<Slider>();
         ingredientHeatSlider.SetActive(false);
- 
+
         meshFilter = GetComponent<MeshFilter>();
-        meshName= meshFilter.mesh.name;
+        meshName = meshFilter.mesh.name.Replace("Raw", "").Replace(" Instance", "");
     }
 
     void Update()
@@ -40,19 +37,33 @@ public class Ingredient : MonoBehaviour
             if (cooked > 15000)
             {
                 Debug.Log("Burned");
-                Mesh burntMesh = Resources.Load<Mesh>($"Meshes/{meshName}Burnt");
-                if (burntMesh != null)
+                string burntPrefabPath = $"Meshes/{meshName}Burnt";
+                Debug.Log($"Trying to load prefab at path: {burntPrefabPath}");
+                GameObject burntPrefab = Resources.Load<GameObject>(burntPrefabPath);
+                Debug.Log(burntPrefab);
+                if (burntPrefab != null)
                 {
-                    meshFilter.mesh = burntMesh;
+                    MeshFilter burntMeshFilter = burntPrefab.GetComponent<MeshFilter>();
+                    if (burntMeshFilter != null)
+                    {
+                        meshFilter.mesh = burntMeshFilter.sharedMesh;
+                    }
                 }
             }
             else if (cooked > 5500)
             {
                 Debug.Log("Cooked");
-                Mesh cookedMesh = Resources.Load<Mesh>($"Meshes/{meshName}Cooked");
-                if (cookedMesh != null)
+                string cookedPrefabPath = $"Meshes/{meshName}Cooked";
+                Debug.Log($"Trying to load prefab at path: {cookedPrefabPath}");
+                GameObject cookedPrefab = Resources.Load<GameObject>(cookedPrefabPath);
+                Debug.Log(cookedPrefab);
+                if (cookedPrefab != null)
                 {
-                    meshFilter.mesh = cookedMesh;
+                    MeshFilter cookedMeshFilter = cookedPrefab.GetComponent<MeshFilter>();
+                    if (cookedMeshFilter != null)
+                    {
+                        meshFilter.mesh = cookedMeshFilter.sharedMesh;
+                    }
                 }
             }
         }
@@ -61,6 +72,9 @@ public class Ingredient : MonoBehaviour
             ingredientHeatSlider.SetActive(false);
         }
     }
+
+
+
 
 
 

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class PlacardEtage
 {
     public List<Image> kitchenItems = new List<Image>();
@@ -32,7 +33,9 @@ public class PlacardCanvas : MonoBehaviour
             PlacardEtage etage = new PlacardEtage();
             foreach (Transform child in panel2.transform)
             {
-                etage.kitchenItems.Add(child.GetComponent<Image>());
+                Image image = child.GetComponent<Image>();
+                etage.kitchenItems.Add(image);
+                image.GetComponent<Button>().onClick.AddListener(() => SelectImage(image));
             }
             etages.Add(etage);
 
@@ -66,16 +69,34 @@ public class PlacardCanvas : MonoBehaviour
         }
     }
 
-    private void HandleHandButton(Image handImage, Sprite defaultSprite)
+    public void HandleHandButton(Image handImage, Sprite defaultSprite)
     {
-        if (handImage.sprite == defaultSprite && selectedImage != null)
+        if (selectedImage != null)
         {
             handImage.sprite = selectedImage.sprite;
+            selectedImage = null;
         }
         else if (handImage.sprite != defaultSprite)
         {
-            selectedImage = handImage;
+            Sprite spriteToAssign = handImage.sprite;
             handImage.sprite = defaultSprite;
+            CreateItemButton();
+            AssignSpriteToNewItem(spriteToAssign);
+        }
+    }
+
+    private void SelectImage(Image image)
+    {
+        selectedImage = image;
+    }
+
+    private void AssignSpriteToNewItem(Sprite sprite)
+    {
+        PlacardEtage currentEtage = etages[currentEtageIndex];
+        int imageToChange = CheckKitchenItems(currentEtage);
+        if (imageToChange != -1)
+        {
+            currentEtage.kitchenItems[imageToChange].sprite = sprite;
         }
     }
 
@@ -143,5 +164,4 @@ public class PlacardCanvas : MonoBehaviour
             item.gameObject.SetActive(true);
         }
     }
-
 }
