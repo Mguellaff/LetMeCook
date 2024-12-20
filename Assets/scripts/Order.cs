@@ -13,8 +13,8 @@ public class Order : MonoBehaviour
     private Image orderImage;
     private string recipeToMake;
     [SerializeField] private GameObject plate;
-    [SerializeField] private TextMeshProUGUI successText; // Assurez-vous de lier ce TextMeshProUGUI dans l'inspecteur
-    [SerializeField] private AudioSource successAudio; // Assurez-vous de lier cette AudioSource dans l'inspecteur
+    [SerializeField] private TextMeshProUGUI successText; 
+    [SerializeField] private AudioSource successAudio; 
 
     void Start()
     {

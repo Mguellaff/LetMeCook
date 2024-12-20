@@ -25,12 +25,16 @@ public class RecipeManager : MonoBehaviour
 
     public void DisplayRecipes(int i)
     {
-        if(i>maxRecipes)
+        maxRecipes = recipes.Count; // Mise à jour de maxRecipes
+        Debug.Log("Displaying recipe at index: " + i);
+        Debug.Log("Total recipes: " + maxRecipes);
+
+        if (i >= maxRecipes)
         {
             recipeTextLeft.text = null;
             recipeImageLeft.enabled = false;
             recipeTextRight.text = null;
-            recipeImageRight.enabled = false; 
+            recipeImageRight.enabled = false;
         }
         else
         {
@@ -41,7 +45,6 @@ public class RecipeManager : MonoBehaviour
             {
                 recipeTextRight.text = null;
                 recipeImageRight.enabled = false;
-                return;
             }
             else
             {
@@ -51,6 +54,7 @@ public class RecipeManager : MonoBehaviour
             }
         }
     }
+
     private string IngredientsString(int i)
     {
         string ingredients = "";
@@ -66,14 +70,17 @@ public class RecipeManager : MonoBehaviour
         if (i == 0 && recipeNumber > 0)
         {
             recipeNumber -= 2;
+            if (recipeNumber < 0) recipeNumber = 0; 
             DisplayRecipes(recipeNumber);
         }
         else if (i == 1 && recipeNumber + 2 < maxRecipes)
         {
             recipeNumber += 2;
+            if (recipeNumber >= maxRecipes) recipeNumber = maxRecipes - 2; 
             DisplayRecipes(recipeNumber);
         }
     }
+
 
 
     public void OpenRecipe(bool isLeft)

@@ -27,24 +27,11 @@ public class PlacardCanvas : MonoBehaviour
         leftHandImage.sprite = leftHandSprite.sprite;
         rightHandImage.sprite = rightHandSprite.sprite;
         handSprites = Resources.LoadAll<Sprite>("Hands");
+    }
 
-        for (int i = 0; i < 3; i++)
-        {
-            PlacardEtage etage = new PlacardEtage();
-            foreach (Transform child in panel2.transform)
-            {
-                Image image = child.GetComponent<Image>();
-                etage.kitchenItems.Add(image);
-                image.GetComponent<Button>().onClick.AddListener(() => SelectImage(image));
-            }
-            etages.Add(etage);
-
-            // Créer un bouton pour chaque étage
-            GameObject button = Instantiate(etageButtonPrefab, etageButtonContainer);
-            button.GetComponentInChildren<TextMeshProUGUI>().text = "Étage " + (i + 1);
-            int index = i;
-            button.GetComponent<Button>().onClick.AddListener(() => SelectEtage(index));
-        }
+    void OnEnable()
+    {
+        GenerateRandomEtages();
     }
 
     void Update()
@@ -162,6 +149,53 @@ public class PlacardCanvas : MonoBehaviour
         foreach (var item in etages[currentEtageIndex].kitchenItems)
         {
             item.gameObject.SetActive(true);
+        }
+    }
+
+    private void GenerateRandomEtages()
+    {
+        // Clear existing etages and buttons
+        etages.Clear();
+        foreach (Transform child in etageButtonContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        int numberOfEtages = Random.Range(2, 8); // Génère un nombre aléatoire entre 2 et 7 (8 est exclus)
+        Debug.Log("Nombre d'étages généré : " + numberOfEtages);
+
+        for (int i = 0; i < numberOfEtages; i++)
+        {
+            PlacardEtage etage = new PlacardEtage();
+            foreach (Transform child in panel2.transform)
+            {
+                Image image = child.GetComponent<Image>();
+                etage.kitchenItems.Add(image);
+            }
+            etages.Add(etage);
+            Debug.Log("count:" + etages.Count);
+            GameObject button = Instantiate(etageButtonPrefab, etageButtonContainer);
+            if (button != null)
+            {
+                Debug.Log($"Button for Étage {i + 1} instantiated successfully.");
+            }
+            else
+            {
+                Debug.LogError($"Failed to instantiate button for Étage {i + 1}.");
+            }
+
+            if (etageButtonContainer != null)
+            {
+                Debug.Log("etageButtonContainer is assigned.");
+            }
+            else
+            {
+                Debug.LogError("etageButtonContainer is not assigned.");
+            }
+
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "Étage " + (i + 1);
+            int index = i;
+            button.GetComponent<Button>().onClick.AddListener(() => SelectEtage(index));
         }
     }
 }

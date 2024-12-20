@@ -54,7 +54,10 @@ public class RecipeCreator : MonoBehaviour
 #endif
 
         recipeManager.recipes.Add(newRecipe);
-        Debug.Log(recipeManager.recipes.Count);
-        recipeManager.DisplayRecipes(Math.Max(0, recipeManager.recipes.Count - 2));
+        Debug.Log("Recipe added: " + newRecipe.title);
+        Debug.Log("Total recipes: " + recipeManager.recipes.Count);
+
+        recipeManager.DisplayRecipes(Math.Max(0, recipeManager.recipes.Count - 1));
     }
+
 }

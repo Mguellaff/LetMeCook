@@ -103,11 +103,16 @@ public class ChooseHand : MonoBehaviour
         {
             foreach (Transform child in transform.parent)
             {
-                MeshFilter meshFilter = child.GetComponent<MeshFilter>();
-                if (meshFilter != null && meshFilter.mesh.name.Replace(" Instance", "") == hand.sprite.name)
+                if (child.tag == "Grabable")
                 {
-                    ingredient = child.gameObject;
-                    break;
+                    MeshFilter meshFilter = child.GetComponent<MeshFilter>();
+                    string meshName = meshFilter.mesh.name.Replace(" Instance", "");
+                    Debug.Log("Mesh name: " + meshName);
+                    if (meshFilter != null && meshName == hand.sprite.name)
+                    {
+                        ingredient = child.gameObject;
+                        break;
+                    }
                 }
             }
 
@@ -116,11 +121,14 @@ public class ChooseHand : MonoBehaviour
                 container.AddIngredient(ingredient);
                 Debug.Log("Ingredient added to container: " + ingredient.name);
                 ingredient.transform.SetParent(container.transform);
-                ingredient.transform.localPosition = Vector3.zero; // Ajustez la position selon vos besoins
+                ingredient.transform.localPosition = Vector3.zero;
+                ingredient.transform.localRotation = Quaternion.identity;
+                ingredient.transform.localScale = Vector3.one;
             }
 
             hand.sprite = System.Array.Find(handSprites, sprite => sprite.name == name);
             Debug.Log("Hand sprite set to: " + hand.sprite.name);
         }
     }
+
 }
