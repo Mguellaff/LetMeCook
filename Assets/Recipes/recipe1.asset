@@ -16,5 +16,4 @@ MonoBehaviour:
   description: Ca donne envie
   ingredients:
   - "Poulet bien cuit bien cram\xE9"
-  - "Des champignons coup\xE9s et cuits"
   image: {fileID: 21300000, guid: 5c96be802a790d1478a865731bc08786, type: 3}

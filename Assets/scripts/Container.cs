@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Container : MonoBehaviour
 {
-    private bool isEmpty = true; 
+    private bool isEmpty = true;
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void AddIngredient(GameObject ingredient)
@@ -30,6 +30,7 @@ public class Container : MonoBehaviour
     {
         return isEmpty;
     }
+
     public void EmptyContainer()
     {
         if (!isEmpty)
@@ -44,19 +45,11 @@ public class Container : MonoBehaviour
                     childrenToRemove.Add(child);
                 }
             }
-            for (int i = 0; i < childrenToRemove.Count; i++)
-            {
-
-            }
 
             foreach (Transform child in childrenToRemove)
             {
-                child.SetParent(null);
-                child.position = new Vector3(0, -10, 0);
+                Destroy(child.gameObject);
             }
         }
     }
-
-
-
 }

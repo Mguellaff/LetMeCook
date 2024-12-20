@@ -16,5 +16,4 @@ MonoBehaviour:
   description: "Je te l'ai vol\xE9 ce matin"
   ingredients:
   - "Ton poisson cuit \xE0 la po\xEBle"
-  - Des petites fritasses
   image: {fileID: 21300000, guid: 97deae6238ce04d44b10382197bca6b5, type: 3}
