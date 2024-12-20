@@ -1,8 +1,11 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System;
+
 public class RecipeCreator : MonoBehaviour
 {
     [SerializeField] private TMP_InputField titleInputField;
@@ -43,12 +46,15 @@ public class RecipeCreator : MonoBehaviour
         newRecipe.description = descriptionInputField.text;
         newRecipe.ingredients = new List<string>(ingredientsInputField.text.Split('\n'));
         newRecipe.image = null;
+
+#if UNITY_EDITOR
         string path = "Assets/Recipes/" + newRecipe.title + ".asset";
         AssetDatabase.CreateAsset(newRecipe, path);
         AssetDatabase.SaveAssets();
+#endif
+
         recipeManager.recipes.Add(newRecipe);
         Debug.Log(recipeManager.recipes.Count);
         recipeManager.DisplayRecipes(Math.Max(0, recipeManager.recipes.Count - 2));
-
     }
 }
